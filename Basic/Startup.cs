@@ -28,6 +28,8 @@ namespace Basic
 
             /*  Require to configure authentication and authorization middleware  */
 
+            /* Sample comment*/
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
