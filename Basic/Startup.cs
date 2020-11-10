@@ -26,6 +26,8 @@ namespace Basic
                 app.UseDeveloperExceptionPage();
             }
 
+            /*  Require to configure authentication and authorization middleware  */
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
