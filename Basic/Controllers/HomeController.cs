@@ -29,6 +29,7 @@ namespace Basic.Controllers
                 new Claim(ClaimTypes.Name, "Ranga"),
                 new Claim(ClaimTypes.Email, "ranga@somedomain.com"),
                 new Claim("NickName", "Benji")
+
             };
 
             var cookieAuthIdentity = new ClaimsIdentity(cookieAuth, "selfIdentity");
