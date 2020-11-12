@@ -33,7 +33,10 @@ namespace Basic
             }
             
             app.UseRouting();
+            // Who you are?
+            app.UseAuthentication();
 
+            // Are you allowed?
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
