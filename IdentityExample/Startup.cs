@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 using IdentityExample.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace IdentityExample
@@ -22,15 +23,11 @@ namespace IdentityExample
             {
                 config.UseInMemoryDatabase("InMemory");
             });
-            
-            var authSchema = "Cookie.Auth";
 
-            services.AddAuthentication()
-                .AddCookie(authSchema, o =>
-                {
-                    o.Cookie.Name = "Cookie.User";
-                    o.LoginPath = "/home/Authenticate";
-                });
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+           
 
             services.AddControllersWithViews();
 
