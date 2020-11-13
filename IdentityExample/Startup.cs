@@ -24,11 +24,21 @@ namespace IdentityExample
                 config.UseInMemoryDatabase("InMemory");
             });
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<IdentityUser, IdentityRole>(o =>
+                {
+                    o.Password.RequireDigit = false;
+                    o.Password.RequireLowercase = false;
+                    o.Password.RequireNonAlphanumeric = false;
+                    o.Password.RequireUppercase = false;
+
+                })
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
-           
-
+            services.ConfigureApplicationCookie(configure =>
+            {
+                configure.Cookie.Name = "Cookie.Auth";
+                configure.LoginPath = "/home/login";
+            });
             services.AddControllersWithViews();
 
         }
@@ -41,13 +51,12 @@ namespace IdentityExample
             }
 
             app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            app.UseEndpoints(config =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                config.MapDefaultControllerRoute();
             });
         }
     }
