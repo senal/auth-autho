@@ -7,8 +7,7 @@ trigger:
 - main
 
 pool:
-  name: 'Default'
-  vmImage: 'buildagent-vm'
+vmImage: 'ubuntu-latest'
 
 variables:
   buildConfiguration: 'Release'
